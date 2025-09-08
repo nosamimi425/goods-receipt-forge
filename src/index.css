@@ -124,11 +124,22 @@
   }
 
   /* Print styles for professional A4 documents */
+  @page {
+    margin: 1.5cm 1cm; /* Set page margins */
+    size: A4; /* Specify A4 page size */
+  }
+  
   @media print {
+    /* Hide browser default headers and footers */
+    @page { 
+      margin: 1.5cm 1cm;
+      size: A4;
+    }
+    
     .no-print { display: none !important; }
     .print-page { 
       page-break-inside: avoid;
-      margin: 1.5cm 1cm; /* Reduced margins for A4 */
+      margin: 0; /* Remove component margins, rely on @page margins */
       font-size: 11pt;
       line-height: 1.3;
     }
