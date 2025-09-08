@@ -171,15 +171,10 @@ export const ReceiptPreview = ({ data }: ReceiptPreviewProps) => {
       </div>
 
       {/* Document Footer */}
-      <div className="mt-12 pt-6 border-t border-border text-center text-sm text-muted-foreground">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <FileText className="h-4 w-4" />
-            <span>Document No: <strong>{data.document.number}</strong></span>
-          </div>
-          <div>
-            Generated on {new Date().toLocaleDateString("en-GB")}
-          </div>
+      <div className="mt-8 pt-4 border-t border-border text-center text-sm text-muted-foreground">
+        <div className="flex items-center justify-center gap-2">
+          <FileText className="h-4 w-4" />
+          <span>Document No: <strong>{data.document.number}</strong></span>
         </div>
       </div>
     </div>
