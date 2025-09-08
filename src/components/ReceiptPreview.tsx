@@ -22,13 +22,13 @@ export const ReceiptPreview = ({ data }: ReceiptPreviewProps) => {
       <div className="receipt-header">
         <div className="flex justify-between items-start">
           <div className="flex-1">
-            <h1 className="text-2xl font-bold text-primary mb-2">{data.company.name}</h1>
+            <h1 className="text-xl font-bold text-primary mb-1">{data.company.name}</h1>
             {data.company.registrationNumber && (
-              <p className="text-sm text-muted-foreground mb-1">
+              <p className="text-xs text-muted-foreground mb-1">
                 Registration No: {data.company.registrationNumber}
               </p>
             )}
-            <div className="text-sm space-y-1">
+            <div className="text-xs space-y-0.5">
               <p>{data.company.address1}</p>
               {data.company.address2 && <p>{data.company.address2}</p>}
               <div className="flex gap-4 text-muted-foreground">
@@ -38,34 +38,34 @@ export const ReceiptPreview = ({ data }: ReceiptPreviewProps) => {
             </div>
           </div>
           {data.company.logo && (
-            <div className="w-20 h-20 bg-muted rounded flex items-center justify-center">
-              <Building2 className="h-10 w-10 text-muted-foreground" />
+            <div className="w-16 h-16 bg-muted rounded flex items-center justify-center">
+              <Building2 className="h-8 w-8 text-muted-foreground" />
             </div>
           )}
         </div>
       </div>
 
       {/* Document Info */}
-      <div className="flex justify-between items-center mb-6 text-sm">
+      <div className="flex justify-between items-center mb-4 text-xs">
         <div className="flex items-center gap-2">
-          <MapPin className="h-4 w-4" />
+          <MapPin className="h-3 w-3" />
           <span>Issued at: <strong>{data.document.place}</strong></span>
         </div>
         <div className="flex items-center gap-2">
-          <Calendar className="h-4 w-4" />
+          <Calendar className="h-3 w-3" />
           <span>Date: <strong>{formatDate(data.document.date)}</strong></span>
         </div>
       </div>
 
       {/* Title */}
-      <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-foreground">GOODS HANDOVER RECEIPT</h2>
-        <p className="text-sm text-muted-foreground mt-2">Décharge de Réception</p>
+      <div className="text-center mb-4">
+        <h2 className="text-lg font-bold text-foreground">GOODS HANDOVER RECEIPT</h2>
+        <p className="text-xs text-muted-foreground mt-1">Décharge de Réception</p>
       </div>
 
       {/* Intro Paragraph */}
       <div className="receipt-section">
-        <p className="text-base leading-relaxed">
+        <p className="text-sm leading-normal">
           I, <strong>{data.recipient.name}</strong>
           {data.recipient.jobTitle && ` (${data.recipient.jobTitle})`}
           {data.recipient.idNumber && `, ID: ${data.recipient.idNumber}`},
@@ -79,39 +79,39 @@ export const ReceiptPreview = ({ data }: ReceiptPreviewProps) => {
       {/* Equipment List */}
       <div className="receipt-section">
         {data.equipment.length > 0 ? (
-          <div className="border border-border rounded-lg overflow-hidden">
+          <div className="border border-border rounded-lg overflow-hidden equipment-table">
             <table className="w-full">
               <thead className="bg-muted">
                 <tr>
-                  <th className="text-left p-3 font-medium">Description</th>
-                  <th className="text-center p-3 font-medium w-20">Qty</th>
-                  <th className="text-center p-3 font-medium w-16">Unit</th>
-                  <th className="text-left p-3 font-medium w-32">Reference</th>
-                  <th className="text-left p-3 font-medium w-32">Serial No.</th>
+                  <th className="text-left p-2 font-medium text-xs">Description</th>
+                  <th className="text-center p-2 font-medium w-16 text-xs">Qty</th>
+                  <th className="text-center p-2 font-medium w-12 text-xs">Unit</th>
+                  <th className="text-left p-2 font-medium w-24 text-xs">Reference</th>
+                  <th className="text-left p-2 font-medium w-24 text-xs">Serial No.</th>
                 </tr>
               </thead>
               <tbody>
                 {data.equipment.map((item, index) => (
                   <tr key={item.id} className={index % 2 === 0 ? "bg-background" : "bg-muted/30"}>
-                    <td className="p-3">
+                    <td className="p-2">
                       <div>
-                        <div className="font-medium">{item.description || "—"}</div>
+                        <div className="font-medium text-xs">{item.description || "—"}</div>
                         {item.notes && (
-                          <div className="text-sm text-muted-foreground mt-1">{item.notes}</div>
+                          <div className="text-xs text-muted-foreground mt-0.5">{item.notes}</div>
                         )}
                       </div>
                     </td>
-                    <td className="p-3 text-center font-medium">{item.quantity}</td>
-                    <td className="p-3 text-center">{item.unit || "—"}</td>
-                    <td className="p-3">{item.reference || "—"}</td>
-                    <td className="p-3">{item.serialNumber || "—"}</td>
+                    <td className="p-2 text-center font-medium text-xs">{item.quantity}</td>
+                    <td className="p-2 text-center text-xs">{item.unit || "—"}</td>
+                    <td className="p-2 text-xs">{item.reference || "—"}</td>
+                    <td className="p-2 text-xs">{item.serialNumber || "—"}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         ) : (
-          <div className="border border-dashed border-muted-foreground/30 rounded-lg p-8 text-center text-muted-foreground">
+          <div className="border border-dashed border-muted-foreground/30 rounded-lg p-6 text-center text-muted-foreground">
             No equipment items added yet
           </div>
         )}
@@ -120,7 +120,7 @@ export const ReceiptPreview = ({ data }: ReceiptPreviewProps) => {
       {/* Confirmation Text */}
       {data.confirmationText && (
         <div className="receipt-section">
-          <p className="text-base leading-relaxed bg-accent/50 p-4 rounded-lg">
+          <p className="text-sm leading-normal bg-accent/50 p-3 rounded-lg">
             {data.confirmationText}
           </p>
         </div>
@@ -129,40 +129,40 @@ export const ReceiptPreview = ({ data }: ReceiptPreviewProps) => {
       {/* Additional Notes */}
       {data.notes && (
         <div className="receipt-section">
-          <h3 className="font-medium mb-2">Additional Notes:</h3>
-          <p className="text-sm bg-muted/50 p-3 rounded">{data.notes}</p>
+          <h3 className="font-medium mb-1 text-sm">Additional Notes:</h3>
+          <p className="text-xs bg-muted/50 p-2 rounded">{data.notes}</p>
         </div>
       )}
 
       {/* Signatures Section */}
-      <div className="receipt-section mt-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="receipt-section mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <h3 className="font-medium mb-3">Recipient</h3>
-            <div className="space-y-2">
-              <p className="text-sm">
+            <h3 className="font-medium mb-2 text-sm">Recipient</h3>
+            <div className="space-y-1">
+              <p className="text-xs">
                 Name: <strong>{data.recipient.name}</strong>
               </p>
               <div className="signature-box">
                 {data.recipientSignature ? (
-                  <span className="text-primary">Signature provided</span>
+                  <span className="text-primary text-xs">Signature provided</span>
                 ) : (
-                  <span>Signature: ________________________</span>
+                  <span className="text-xs">Signature: ________________________</span>
                 )}
               </div>
             </div>
           </div>
           <div>
-            <h3 className="font-medium mb-3">Issuer</h3>
-            <div className="space-y-2">
-              <p className="text-sm">
+            <h3 className="font-medium mb-2 text-sm">Issuer</h3>
+            <div className="space-y-1">
+              <p className="text-xs">
                 Name: <strong>{data.issuer.name}</strong>
               </p>
               <div className="signature-box">
                 {data.issuerSignature ? (
-                  <span className="text-primary">Signature provided</span>
+                  <span className="text-primary text-xs">Signature provided</span>
                 ) : (
-                  <span>Signature: ________________________</span>
+                  <span className="text-xs">Signature: ________________________</span>
                 )}
               </div>
             </div>
@@ -171,9 +171,9 @@ export const ReceiptPreview = ({ data }: ReceiptPreviewProps) => {
       </div>
 
       {/* Document Footer */}
-      <div className="mt-8 pt-4 border-t border-border text-center text-sm text-muted-foreground">
-        <div className="flex items-center justify-center gap-2">
-          <FileText className="h-4 w-4" />
+      <div className="mt-4 pt-2 border-t border-border text-center text-xs text-muted-foreground">
+        <div className="flex items-center justify-center gap-1">
+          <FileText className="h-3 w-3" />
           <span>Document No: <strong>{data.document.number}</strong></span>
         </div>
       </div>
