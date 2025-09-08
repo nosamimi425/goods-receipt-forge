@@ -1,12 +1,117 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { FileDown, Printer, Eye, EyeOff } from "lucide-react";
+import { ReceiptForm } from "@/components/ReceiptForm";
+import { ReceiptPreview } from "@/components/ReceiptPreview";
+import { ReceiptData } from "@/types/receipt";
 
 const Index = () => {
+  const [showPreview, setShowPreview] = useState(true);
+  const [receiptData, setReceiptData] = useState<ReceiptData>({
+    company: {
+      name: "",
+      address1: "",
+    },
+    document: {
+      place: "OULED GACEM",
+      date: new Date().toISOString().split('T')[0],
+      number: `REC-${new Date().getFullYear()}-${String(Date.now() % 10000).padStart(4, '0')}`,
+    },
+    recipient: {
+      name: "",
+    },
+    issuer: {
+      name: "",
+    },
+    equipment: [{
+      id: "1",
+      description: "",
+      quantity: 1,
+      unit: "pcs",
+    }],
+    confirmationText: "I hereby confirm that I have received the above-mentioned equipment in good condition and in the specified quantity.",
+  });
+
+  const handlePrint = () => {
+    window.print();
+  };
+
+  const handleDownloadPDF = async () => {
+    // For now, just trigger the browser's print dialog with PDF option
+    // In a real implementation, you'd use a library like jsPDF or Puppeteer
+    if (window.confirm("This will open the print dialog. Choose 'Save as PDF' in your browser's print options.")) {
+      window.print();
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="no-print border-b border-border bg-card">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-2xl font-bold text-primary">Receipt Generator</h1>
+              <p className="text-muted-foreground">Professional Goods Handover Receipts</p>
+            </div>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setShowPreview(!showPreview)}
+                className="md:hidden"
+              >
+                {showPreview ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+              </Button>
+              <Button onClick={handlePrint} variant="outline" size="sm">
+                <Printer className="h-4 w-4 mr-2" />
+                Print
+              </Button>
+              <Button onClick={handleDownloadPDF} size="sm" className="btn-gradient">
+                <FileDown className="h-4 w-4 mr-2" />
+                Download PDF
+              </Button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="container mx-auto px-4 py-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Form Section */}
+          <div className={`no-print ${showPreview ? 'hidden lg:block' : 'block'}`}>
+            <Card>
+              <CardHeader>
+                <CardTitle>Receipt Details</CardTitle>
+                <p className="text-sm text-muted-foreground">
+                  Fill in the information below to generate your receipt
+                </p>
+              </CardHeader>
+              <CardContent>
+                <ReceiptForm data={receiptData} onChange={setReceiptData} />
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Preview Section */}
+          <div className={`${!showPreview ? 'hidden lg:block' : 'block'}`}>
+            <div className="sticky top-6">
+              <Card className="no-print mb-4">
+                <CardHeader>
+                  <CardTitle>Live Preview</CardTitle>
+                  <p className="text-sm text-muted-foreground">
+                    This is how your receipt will look when printed
+                  </p>
+                </CardHeader>
+              </Card>
+              <ReceiptPreview data={receiptData} />
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
   );
 };
