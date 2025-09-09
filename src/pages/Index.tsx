@@ -17,6 +17,7 @@ const Index = () => {
       address2: "Bir Mourad Rais - Alger\n\nDirection administrative: 37 Rue Ain Sultane les oliviers - Kouba - Alger",
       phone: "044 95 16 01 / 044 95 19 06",
       email: "contact@imgsa.dz",
+      logo: "/lovable-uploads/595b5aac-31bc-49ac-b204-2ac06ba02df0.png",
     },
     document: {
       place: "OULED GACEM",
