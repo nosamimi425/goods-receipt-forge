@@ -12,12 +12,12 @@ const Index = () => {
   const [receiptData, setReceiptData] = useState<ReceiptData>({
     company: {
       name: "GROUPE INDUSTRIE PHARMACEUTIQUE SPA",
-      registrationNumber: "Capital Social: 2 000 000 000,00 DA",
-      address1: "cité 156/554 logements BT.33 N 28 Said Hamdine",
-      address2: "Bir Mourad Rais - Alger\n\nDirection administrative: 37 Rue Ain Sultane les oliviers - Kouba - Alger",
-      phone: "044 95 16 01 / 044 95 19 06",
-      email: "contact@imgsa.dz",
-      logo: "/lovable-uploads/595b5aac-31bc-49ac-b204-2ac06ba02df0.png",
+      registrationNumber: "Capital Social 1 500 000 000,00DA",
+      address1: "Siège Social : cité 156/554 logements BT.33 N 28 Said Hamdine",
+      address2: "Bir Mourad Rais - Alger\nDirection administrative : 37 Rue Ain Sultane les oliviers - Kouba - Alger",
+      phone: "044 95 16 01 • Tel/Fax: 044 95 19 06",
+      email: "contact@imgsa.dz Site: www.imgsa.dz",
+      logo: "/lovable-uploads/dd0ca01b-0b77-4c06-8ffa-5a71df8c6ae0.png",
     },
     document: {
       place: "OULED GACEM",
