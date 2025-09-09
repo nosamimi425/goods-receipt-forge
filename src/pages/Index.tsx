@@ -11,8 +11,12 @@ const Index = () => {
   const [showPreview, setShowPreview] = useState(true);
   const [receiptData, setReceiptData] = useState<ReceiptData>({
     company: {
-      name: "",
-      address1: "",
+      name: "GROUPE INDUSTRIE PHARMACEUTIQUE SPA",
+      registrationNumber: "Capital Social: 2 000 000 000,00 DA",
+      address1: "cité 156/554 logements BT.33 N 28 Said Hamdine",
+      address2: "Bir Mourad Rais - Alger\n\nDirection administrative: 37 Rue Ain Sultane les oliviers - Kouba - Alger",
+      phone: "044 95 16 01 / 044 95 19 06",
+      email: "contact@imgsa.dz",
     },
     document: {
       place: "OULED GACEM",
@@ -53,7 +57,7 @@ const Index = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-2xl font-bold text-primary">Receipt Generator</h1>
+              <h1 className="text-2xl font-bold text-primary">IMGSA TECHNOLOGY</h1>
               <p className="text-muted-foreground">Professional Goods Handover Receipts</p>
             </div>
             <div className="flex gap-2">
