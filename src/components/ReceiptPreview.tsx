@@ -20,25 +20,10 @@ export const ReceiptPreview = ({ data }: ReceiptPreviewProps) => {
     <div className="document-preview receipt-document print-page">
       {/* Header */}
       <div className="receipt-header">
-        <div className="flex justify-between items-start">
-          <div className="flex-1">
-            <h1 className="text-xl font-bold text-primary mb-1">{data.company.name}</h1>
-            {data.company.registrationNumber && (
-              <p className="text-xs text-muted-foreground mb-1">
-                Registration No: {data.company.registrationNumber}
-              </p>
-            )}
-            <div className="text-xs space-y-0.5">
-              <p>{data.company.address1}</p>
-              {data.company.address2 && <p>{data.company.address2}</p>}
-              <div className="flex gap-4 text-muted-foreground">
-                {data.company.phone && <span>Tel: {data.company.phone}</span>}
-                {data.company.email && <span>Email: {data.company.email}</span>}
-              </div>
-            </div>
-          </div>
+        <div className="flex justify-between items-start gap-6">
+          {/* Logo on the left */}
           {data.company.logo && (
-            <div className="w-16 h-16 flex items-center justify-center">
+            <div className="w-20 h-16 flex items-center justify-center flex-shrink-0">
               <img 
                 src={data.company.logo} 
                 alt="Company Logo" 
@@ -46,6 +31,30 @@ export const ReceiptPreview = ({ data }: ReceiptPreviewProps) => {
               />
             </div>
           )}
+          
+          {/* Company information on the right */}
+          <div className="flex-1 text-right">
+            <h1 className="text-lg font-bold text-primary mb-1">{data.company.name}</h1>
+            {data.company.registrationNumber && (
+              <p className="text-xs text-foreground mb-1">
+                {data.company.registrationNumber}
+              </p>
+            )}
+            <div className="text-xs space-y-0.5 text-foreground">
+              <p>{data.company.address1}</p>
+              {data.company.address2 && (
+                <div>
+                  {data.company.address2.split('\n').map((line, index) => (
+                    <p key={index}>{line}</p>
+                  ))}
+                </div>
+              )}
+              <div className="text-foreground">
+                {data.company.phone && <p>Tel: {data.company.phone}</p>}
+                {data.company.email && <p>E-mail: {data.company.email}</p>}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
