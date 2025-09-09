@@ -38,8 +38,12 @@ export const ReceiptPreview = ({ data }: ReceiptPreviewProps) => {
             </div>
           </div>
           {data.company.logo && (
-            <div className="w-16 h-16 bg-muted rounded flex items-center justify-center">
-              <Building2 className="h-8 w-8 text-muted-foreground" />
+            <div className="w-16 h-16 flex items-center justify-center">
+              <img 
+                src={data.company.logo} 
+                alt="Company Logo" 
+                className="w-full h-full object-contain"
+              />
             </div>
           )}
         </div>
@@ -59,8 +63,8 @@ export const ReceiptPreview = ({ data }: ReceiptPreviewProps) => {
 
       {/* Title */}
       <div className="text-center mb-4">
-        <h2 className="text-lg font-bold text-foreground">GOODS HANDOVER RECEIPT</h2>
-        <p className="text-xs text-muted-foreground mt-1">Décharge de Réception</p>
+        <h2 className="text-lg font-bold text-foreground">IMGSA TECHNOLOGY</h2>
+        <p className="text-xs text-muted-foreground mt-1">Professional Equipment Management</p>
       </div>
 
       {/* Intro Paragraph */}
