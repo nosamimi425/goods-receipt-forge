@@ -20,41 +20,12 @@ export const ReceiptPreview = ({ data }: ReceiptPreviewProps) => {
     <div className="document-preview receipt-document print-page">
       {/* Header */}
       <div className="receipt-header">
-        <div className="flex justify-between items-start gap-6">
-          {/* Logo on the left */}
-          {data.company.logo && (
-            <div className="w-20 h-16 flex items-center justify-center flex-shrink-0">
-              <img 
-                src={data.company.logo} 
-                alt="Company Logo" 
-                className="w-full h-full object-contain"
-              />
-            </div>
-          )}
-          
-          {/* Company information on the right */}
-          <div className="flex-1 text-right">
-            <h1 className="text-lg font-bold text-primary mb-1">{data.company.name}</h1>
-            {data.company.registrationNumber && (
-              <p className="text-xs text-foreground mb-1">
-                {data.company.registrationNumber}
-              </p>
-            )}
-            <div className="text-xs space-y-0.5 text-foreground">
-              <p>{data.company.address1}</p>
-              {data.company.address2 && (
-                <div>
-                  {data.company.address2.split('\n').map((line, index) => (
-                    <p key={index}>{line}</p>
-                  ))}
-                </div>
-              )}
-              <div className="text-foreground">
-                {data.company.phone && <p>Tel: {data.company.phone}</p>}
-                {data.company.email && <p>E-mail: {data.company.email}</p>}
-              </div>
-            </div>
-          </div>
+        <div className="flex justify-center items-center">
+          <img 
+            src="/lovable-uploads/3feefa29-c6a2-4dec-b348-5a827b8aea8f.png" 
+            alt="IMGSA Groupe - Company Header" 
+            className="w-full max-w-2xl h-auto object-contain"
+          />
         </div>
       </div>
 
