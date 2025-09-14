@@ -67,49 +67,59 @@ export const ReceiptForm = ({ data, onChange }: ReceiptFormProps) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <Label htmlFor="companyName">Company Name *</Label>
-              <Input
-                id="companyName"
-                value={data.company.name}
-                onChange={(e) => updateField("company", "name", e.target.value)}
-                placeholder="Enter company name"
-              />
+               <Input
+                 id="companyName"
+                 name="companyName"
+                 autoComplete="organization"
+                 value={data.company.name}
+                 onChange={(e) => updateField("company", "name", e.target.value)}
+                 placeholder="Enter company name"
+               />
             </div>
             <div>
               <Label htmlFor="regNumber">Registration Number</Label>
-              <Input
-                id="regNumber"
-                value={data.company.registrationNumber || ""}
-                onChange={(e) => updateField("company", "registrationNumber", e.target.value)}
-                placeholder="Tax/Registration number"
-              />
+               <Input
+                 id="regNumber"
+                 name="registrationNumber"
+                 autoComplete="off"
+                 value={data.company.registrationNumber || ""}
+                 onChange={(e) => updateField("company", "registrationNumber", e.target.value)}
+                 placeholder="Tax/Registration number"
+               />
             </div>
             <div className="md:col-span-2">
               <Label htmlFor="address1">Address Line 1</Label>
-              <Input
-                id="address1"
-                value={data.company.address1}
-                onChange={(e) => updateField("company", "address1", e.target.value)}
-                placeholder="Street address"
-              />
+               <Input
+                 id="address1"
+                 name="address1"
+                 autoComplete="street-address"
+                 value={data.company.address1}
+                 onChange={(e) => updateField("company", "address1", e.target.value)}
+                 placeholder="Street address"
+               />
             </div>
             <div>
               <Label htmlFor="phone">Phone</Label>
-              <Input
-                id="phone"
-                value={data.company.phone || ""}
-                onChange={(e) => updateField("company", "phone", e.target.value)}
-                placeholder="Phone number"
-              />
+               <Input
+                 id="phone"
+                 name="phone"
+                 autoComplete="tel"
+                 value={data.company.phone || ""}
+                 onChange={(e) => updateField("company", "phone", e.target.value)}
+                 placeholder="Phone number"
+               />
             </div>
             <div>
               <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                value={data.company.email || ""}
-                onChange={(e) => updateField("company", "email", e.target.value)}
-                placeholder="Email address"
-              />
+               <Input
+                 id="email"
+                 name="email"
+                 type="email"
+                 autoComplete="email"
+                 value={data.company.email || ""}
+                 onChange={(e) => updateField("company", "email", e.target.value)}
+                 placeholder="Email address"
+               />
             </div>
           </div>
         </CardContent>
@@ -127,30 +137,36 @@ export const ReceiptForm = ({ data, onChange }: ReceiptFormProps) => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <Label htmlFor="place">Place</Label>
-              <Input
-                id="place"
-                value={data.document.place}
-                onChange={(e) => updateField("document", "place", e.target.value)}
-                placeholder="OULED GACEM"
-              />
+               <Input
+                 id="place"
+                 name="place"
+                 autoComplete="address-line1"
+                 value={data.document.place}
+                 onChange={(e) => updateField("document", "place", e.target.value)}
+                 placeholder="OULED GACEM"
+               />
             </div>
             <div>
               <Label htmlFor="date">Date</Label>
-              <Input
-                id="date"
-                type="date"
-                value={data.document.date}
-                onChange={(e) => updateField("document", "date", e.target.value)}
-              />
+               <Input
+                 id="date"
+                 name="date"
+                 type="date"
+                 autoComplete="off"
+                 value={data.document.date}
+                 onChange={(e) => updateField("document", "date", e.target.value)}
+               />
             </div>
             <div>
               <Label htmlFor="docNumber">Document Number</Label>
-              <Input
-                id="docNumber"
-                value={data.document.number}
-                onChange={(e) => updateField("document", "number", e.target.value)}
-                placeholder="REC-2024-0001"
-              />
+               <Input
+                 id="docNumber"
+                 name="documentNumber"
+                 autoComplete="off"
+                 value={data.document.number}
+                 onChange={(e) => updateField("document", "number", e.target.value)}
+                 placeholder="REC-2024-0001"
+               />
             </div>
           </div>
         </CardContent>
@@ -171,30 +187,36 @@ export const ReceiptForm = ({ data, onChange }: ReceiptFormProps) => {
               <div className="space-y-3">
                 <div>
                   <Label htmlFor="recipientName">Full Name *</Label>
-                  <Input
-                    id="recipientName"
-                    value={data.recipient.name}
-                    onChange={(e) => updateField("recipient", "name", e.target.value)}
-                    placeholder="Recipient full name"
-                  />
+                   <Input
+                     id="recipientName"
+                     name="recipientName"
+                     autoComplete="name"
+                     value={data.recipient.name}
+                     onChange={(e) => updateField("recipient", "name", e.target.value)}
+                     placeholder="Recipient full name"
+                   />
                 </div>
                 <div>
                   <Label htmlFor="recipientTitle">Job Title</Label>
-                  <Input
-                    id="recipientTitle"
-                    value={data.recipient.jobTitle || ""}
-                    onChange={(e) => updateField("recipient", "jobTitle", e.target.value)}
-                    placeholder="Job title"
-                  />
+                   <Input
+                     id="recipientTitle"
+                     name="recipientJobTitle"
+                     autoComplete="organization-title"
+                     value={data.recipient.jobTitle || ""}
+                     onChange={(e) => updateField("recipient", "jobTitle", e.target.value)}
+                     placeholder="Job title"
+                   />
                 </div>
                 <div>
                   <Label htmlFor="recipientId">ID Number</Label>
-                  <Input
-                    id="recipientId"
-                    value={data.recipient.idNumber || ""}
-                    onChange={(e) => updateField("recipient", "idNumber", e.target.value)}
-                    placeholder="ID number"
-                  />
+                   <Input
+                     id="recipientId"
+                     name="recipientId"
+                     autoComplete="off"
+                     value={data.recipient.idNumber || ""}
+                     onChange={(e) => updateField("recipient", "idNumber", e.target.value)}
+                     placeholder="ID number"
+                   />
                 </div>
               </div>
             </div>
@@ -203,21 +225,25 @@ export const ReceiptForm = ({ data, onChange }: ReceiptFormProps) => {
               <div className="space-y-3">
                 <div>
                   <Label htmlFor="issuerName">Full Name *</Label>
-                  <Input
-                    id="issuerName"
-                    value={data.issuer.name}
-                    onChange={(e) => updateField("issuer", "name", e.target.value)}
-                    placeholder="Issuer full name"
-                  />
+                   <Input
+                     id="issuerName"
+                     name="issuerName"
+                     autoComplete="name"
+                     value={data.issuer.name}
+                     onChange={(e) => updateField("issuer", "name", e.target.value)}
+                     placeholder="Issuer full name"
+                   />
                 </div>
                 <div>
                   <Label htmlFor="issuerTitle">Job Title</Label>
-                  <Input
-                    id="issuerTitle"
-                    value={data.issuer.jobTitle || ""}
-                    onChange={(e) => updateField("issuer", "jobTitle", e.target.value)}
-                    placeholder="Job title"
-                  />
+                   <Input
+                     id="issuerTitle"
+                     name="issuerJobTitle"
+                     autoComplete="organization-title"
+                     value={data.issuer.jobTitle || ""}
+                     onChange={(e) => updateField("issuer", "jobTitle", e.target.value)}
+                     placeholder="Job title"
+                   />
                 </div>
               </div>
             </div>
@@ -263,52 +289,64 @@ export const ReceiptForm = ({ data, onChange }: ReceiptFormProps) => {
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                     <div className="md:col-span-2 lg:col-span-1">
                       <Label>Description *</Label>
-                      <Input
-                        value={item.description}
-                        onChange={(e) => updateEquipmentItem(item.id, "description", e.target.value)}
-                        placeholder="Equipment description"
-                      />
+                       <Input
+                         name="equipmentDescription"
+                         autoComplete="off"
+                         value={item.description}
+                         onChange={(e) => updateEquipmentItem(item.id, "description", e.target.value)}
+                         placeholder="Equipment description"
+                       />
                     </div>
                     <div>
                       <Label>Quantity *</Label>
-                      <Input
-                        type="number"
-                        min="1"
-                        value={item.quantity}
-                        onChange={(e) => updateEquipmentItem(item.id, "quantity", parseInt(e.target.value) || 1)}
-                      />
+                       <Input
+                         name="quantity"
+                         type="number"
+                         min="1"
+                         autoComplete="off"
+                         value={item.quantity}
+                         onChange={(e) => updateEquipmentItem(item.id, "quantity", parseInt(e.target.value) || 1)}
+                       />
                     </div>
                     <div>
                       <Label>Unit</Label>
-                      <Input
-                        value={item.unit || ""}
-                        onChange={(e) => updateEquipmentItem(item.id, "unit", e.target.value)}
-                        placeholder="pcs, sets, etc."
-                      />
+                       <Input
+                         name="unit"
+                         autoComplete="off"
+                         value={item.unit || ""}
+                         onChange={(e) => updateEquipmentItem(item.id, "unit", e.target.value)}
+                         placeholder="pcs, sets, etc."
+                       />
                     </div>
                     <div>
                       <Label>Reference/Model</Label>
-                      <Input
-                        value={item.reference || ""}
-                        onChange={(e) => updateEquipmentItem(item.id, "reference", e.target.value)}
-                        placeholder="Model number"
-                      />
+                       <Input
+                         name="reference"
+                         autoComplete="off"
+                         value={item.reference || ""}
+                         onChange={(e) => updateEquipmentItem(item.id, "reference", e.target.value)}
+                         placeholder="Model number"
+                       />
                     </div>
                     <div>
                       <Label>Serial Number</Label>
-                      <Input
-                        value={item.serialNumber || ""}
-                        onChange={(e) => updateEquipmentItem(item.id, "serialNumber", e.target.value)}
-                        placeholder="Serial number"
-                      />
+                       <Input
+                         name="serialNumber"
+                         autoComplete="off"
+                         value={item.serialNumber || ""}
+                         onChange={(e) => updateEquipmentItem(item.id, "serialNumber", e.target.value)}
+                         placeholder="Serial number"
+                       />
                     </div>
                     <div>
                       <Label>Notes</Label>
-                      <Input
-                        value={item.notes || ""}
-                        onChange={(e) => updateEquipmentItem(item.id, "notes", e.target.value)}
-                        placeholder="Additional notes"
-                      />
+                       <Input
+                         name="notes"
+                         autoComplete="off"
+                         value={item.notes || ""}
+                         onChange={(e) => updateEquipmentItem(item.id, "notes", e.target.value)}
+                         placeholder="Additional notes"
+                       />
                     </div>
                   </div>
                 </div>
@@ -327,23 +365,27 @@ export const ReceiptForm = ({ data, onChange }: ReceiptFormProps) => {
           <div className="space-y-4">
             <div>
               <Label htmlFor="confirmationText">Confirmation Text</Label>
-              <Textarea
-                id="confirmationText"
-                value={data.confirmationText}
-                onChange={(e) => onChange({ ...data, confirmationText: e.target.value })}
-                placeholder="I hereby confirm that I have received the above-mentioned equipment in good condition and in the specified quantity."
-                rows={3}
-              />
+               <Textarea
+                 id="confirmationText"
+                 name="confirmationText"
+                 autoComplete="off"
+                 value={data.confirmationText}
+                 onChange={(e) => onChange({ ...data, confirmationText: e.target.value })}
+                 placeholder="I hereby confirm that I have received the above-mentioned equipment in good condition and in the specified quantity."
+                 rows={3}
+               />
             </div>
             <div>
               <Label htmlFor="notes">Additional Notes</Label>
-              <Textarea
-                id="notes"
-                value={data.notes || ""}
-                onChange={(e) => onChange({ ...data, notes: e.target.value })}
-                placeholder="Any additional notes or remarks"
-                rows={2}
-              />
+               <Textarea
+                 id="notes"
+                 name="notes"
+                 autoComplete="off"
+                 value={data.notes || ""}
+                 onChange={(e) => onChange({ ...data, notes: e.target.value })}
+                 placeholder="Any additional notes or remarks"
+                 rows={2}
+               />
             </div>
           </div>
         </CardContent>

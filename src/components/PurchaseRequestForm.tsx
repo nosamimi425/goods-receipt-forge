@@ -63,6 +63,8 @@ export const PurchaseRequestForm = ({ data, onChange }: PurchaseRequestFormProps
             <Label htmlFor="place">Place</Label>
             <Input
               id="place"
+              name="place"
+              autoComplete="address-line1"
               value={data.document.place}
               onChange={(e) => updateField("document", "place", e.target.value)}
               placeholder="Document place"
@@ -72,7 +74,9 @@ export const PurchaseRequestForm = ({ data, onChange }: PurchaseRequestFormProps
             <Label htmlFor="date">Date</Label>
             <Input
               id="date"
+              name="date"
               type="date"
+              autoComplete="off"
               value={data.document.date}
               onChange={(e) => updateField("document", "date", e.target.value)}
             />
@@ -81,6 +85,8 @@ export const PurchaseRequestForm = ({ data, onChange }: PurchaseRequestFormProps
             <Label htmlFor="number">Document Number</Label>
             <Input
               id="number"
+              name="documentNumber"
+              autoComplete="off"
               value={data.document.number}
               onChange={(e) => updateField("document", "number", e.target.value)}
               placeholder="Document number"
@@ -97,6 +103,8 @@ export const PurchaseRequestForm = ({ data, onChange }: PurchaseRequestFormProps
             <Label htmlFor="requesterName">Requester Name</Label>
             <Input
               id="requesterName"
+              name="requesterName"
+              autoComplete="name"
               value={data.requester.name}
               onChange={(e) => updateField("requester", "name", e.target.value)}
               placeholder="Requester's full name"
@@ -106,6 +114,8 @@ export const PurchaseRequestForm = ({ data, onChange }: PurchaseRequestFormProps
             <Label htmlFor="department">Department</Label>
             <Input
               id="department"
+              name="department"
+              autoComplete="organization"
               value={data.requester.department}
               onChange={(e) => updateField("requester", "department", e.target.value)}
               placeholder="Department name"
@@ -144,6 +154,8 @@ export const PurchaseRequestForm = ({ data, onChange }: PurchaseRequestFormProps
                     <Label htmlFor={`itemName-${item.id}`}>Item Name</Label>
                     <Input
                       id={`itemName-${item.id}`}
+                      name="itemName"
+                      autoComplete="off"
                       value={item.itemName}
                       onChange={(e) => updateRequestedItem(item.id, "itemName", e.target.value)}
                       placeholder="Item name/description"
@@ -153,8 +165,10 @@ export const PurchaseRequestForm = ({ data, onChange }: PurchaseRequestFormProps
                     <Label htmlFor={`quantity-${item.id}`}>Quantity</Label>
                     <Input
                       id={`quantity-${item.id}`}
+                      name="quantity"
                       type="number"
                       min="1"
+                      autoComplete="off"
                       value={item.quantity}
                       onChange={(e) => updateRequestedItem(item.id, "quantity", parseInt(e.target.value) || 1)}
                     />
@@ -163,6 +177,8 @@ export const PurchaseRequestForm = ({ data, onChange }: PurchaseRequestFormProps
                     <Label htmlFor={`unit-${item.id}`}>Unit</Label>
                     <Input
                       id={`unit-${item.id}`}
+                      name="unit"
+                      autoComplete="off"
                       value={item.unit || ""}
                       onChange={(e) => updateRequestedItem(item.id, "unit", e.target.value)}
                       placeholder="pcs, kg, m, etc."
@@ -174,6 +190,8 @@ export const PurchaseRequestForm = ({ data, onChange }: PurchaseRequestFormProps
                   <Label htmlFor={`technicalSpecs-${item.id}`}>Technical Specifications</Label>
                   <Textarea
                     id={`technicalSpecs-${item.id}`}
+                    name="technicalSpecs"
+                    autoComplete="off"
                     value={item.technicalSpecs}
                     onChange={(e) => updateRequestedItem(item.id, "technicalSpecs", e.target.value)}
                     placeholder="Technical specifications and requirements"
@@ -185,6 +203,8 @@ export const PurchaseRequestForm = ({ data, onChange }: PurchaseRequestFormProps
                   <Label htmlFor={`observation-${item.id}`}>Observation</Label>
                   <Textarea
                     id={`observation-${item.id}`}
+                    name="observation"
+                    autoComplete="off"
                     value={item.observation || ""}
                     onChange={(e) => updateRequestedItem(item.id, "observation", e.target.value)}
                     placeholder="Additional observations or notes"
@@ -205,6 +225,8 @@ export const PurchaseRequestForm = ({ data, onChange }: PurchaseRequestFormProps
       <Card className="p-6">
         <h3 className="text-lg font-semibold mb-4">Additional Notes</h3>
         <Textarea
+          name="notes"
+          autoComplete="off"
           value={data.notes || ""}
           onChange={(e) => onChange({ ...data, notes: e.target.value })}
           placeholder="Any additional notes or comments..."
