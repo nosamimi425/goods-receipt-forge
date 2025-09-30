@@ -11,7 +11,7 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
 
   const handleComplete = () => {
     setIsFadingOut(true);
-    setTimeout(onComplete, 600);
+    setTimeout(onComplete, 300);
   };
 
   const handleSkip = () => {
@@ -29,9 +29,28 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
       handleComplete();
     };
 
+    const handleError = () => {
+      console.error("Video failed to load");
+      handleComplete(); // Skip splash if video fails
+    };
+
     if (video) {
       video.addEventListener("ended", handleVideoEnd);
-      return () => video.removeEventListener("ended", handleVideoEnd);
+      video.addEventListener("error", handleError);
+      
+      // Force play if autoplay fails
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((error) => {
+          console.log("Autoplay failed:", error);
+          // Video will still show, user can click skip
+        });
+      }
+
+      return () => {
+        video.removeEventListener("ended", handleVideoEnd);
+        video.removeEventListener("error", handleError);
+      };
     }
   }, []);
 
@@ -46,7 +65,9 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
       <video
         id="splash-video"
         autoPlay
+        muted
         playsInline
+        preload="auto"
         className="max-w-full max-h-full transition-transform duration-300"
       >
         <source src="/logo-animation.mp4" type="video/mp4" />
