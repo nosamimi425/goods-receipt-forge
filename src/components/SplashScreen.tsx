@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 
 interface SplashScreenProps {
@@ -8,13 +8,10 @@ interface SplashScreenProps {
 export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
   const [isVisible, setIsVisible] = useState(true);
   const [isFadingOut, setIsFadingOut] = useState(false);
-  const completedRef = useRef(false);
 
   const handleComplete = () => {
-    if (completedRef.current) return;
-    completedRef.current = true;
     setIsFadingOut(true);
-    setTimeout(onComplete, 200);
+    setTimeout(onComplete, 300);
   };
 
   const handleSkip = () => {
@@ -57,13 +54,6 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
     }
   }, []);
 
-  // Fallback: ensure splash never exceeds MAX_DURATION
-  useEffect(() => {
-    const MAX_DURATION = 1500; // 1.5s cap
-    const t = setTimeout(() => handleComplete(), MAX_DURATION);
-    return () => clearTimeout(t);
-  }, []);
-
   if (!isVisible) return null;
 
   return (
@@ -77,8 +67,7 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
         autoPlay
         muted
         playsInline
-        preload="none"
-        aria-hidden="true"
+        preload="auto"
         className="max-w-full max-h-full transition-transform duration-300"
       >
         <source src="/logo-animation.mp4" type="video/mp4" />
