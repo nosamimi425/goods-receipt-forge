@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 
 interface SplashScreenProps {
   onComplete: () => void;
@@ -6,34 +7,58 @@ interface SplashScreenProps {
 
 export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
   const [isVisible, setIsVisible] = useState(true);
+  const [isFadingOut, setIsFadingOut] = useState(false);
+
+  const handleComplete = () => {
+    setIsFadingOut(true);
+    setTimeout(onComplete, 600);
+  };
+
+  const handleSkip = () => {
+    const video = document.getElementById("splash-video") as HTMLVideoElement;
+    if (video) {
+      video.pause();
+    }
+    handleComplete();
+  };
 
   useEffect(() => {
     const video = document.getElementById("splash-video") as HTMLVideoElement;
     
     const handleVideoEnd = () => {
-      setIsVisible(false);
-      setTimeout(onComplete, 500);
+      handleComplete();
     };
 
     if (video) {
       video.addEventListener("ended", handleVideoEnd);
       return () => video.removeEventListener("ended", handleVideoEnd);
     }
-  }, [onComplete]);
+  }, []);
 
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-background animate-in fade-in">
+    <div 
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-background transition-opacity duration-500 ${
+        isFadingOut ? "opacity-0" : "opacity-100 animate-in fade-in"
+      }`}
+    >
       <video
         id="splash-video"
         autoPlay
-        muted
         playsInline
-        className="max-w-full max-h-full"
+        className="max-w-full max-h-full transition-transform duration-300"
       >
         <source src="/logo-animation.mp4" type="video/mp4" />
       </video>
+      
+      <Button
+        onClick={handleSkip}
+        variant="ghost"
+        className="absolute bottom-8 right-8 opacity-70 hover:opacity-100 transition-opacity"
+      >
+        تخطي
+      </Button>
     </div>
   );
 };
