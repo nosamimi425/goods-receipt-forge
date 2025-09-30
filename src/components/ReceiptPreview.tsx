@@ -1,5 +1,6 @@
 import { ReceiptData } from "@/types/receipt";
 import { Building2, MapPin, Calendar, FileText } from "lucide-react";
+import companyHeader from "@/assets/company-header.jpg";
 
 interface ReceiptPreviewProps {
   data: ReceiptData;
@@ -22,7 +23,7 @@ export const ReceiptPreview = ({ data }: ReceiptPreviewProps) => {
       <div className="receipt-header">
         <div className="flex justify-center items-center">
           <img 
-            src="/lovable-uploads/3feefa29-c6a2-4dec-b348-5a827b8aea8f.png" 
+            src={companyHeader}
             alt="IMGSA Groupe - Company Header" 
             className="w-full max-w-2xl h-auto object-contain"
           />
