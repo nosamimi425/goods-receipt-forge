@@ -130,25 +130,44 @@
   }
   
   @media print {
+    /* Force exact color and image printing */
     * {
       -webkit-print-color-adjust: exact !important;
       print-color-adjust: exact !important;
     }
     
+    /* Reset page and body margins */
     html, body {
       margin: 0 !important;
       padding: 0 !important;
       width: 210mm;
       height: 297mm;
       overflow: hidden;
+      background-color: #fff;
     }
     
     body {
       margin: 0 !important;
     }
     
-    .no-print { 
-      display: none !important; 
+    /* Hide all non-essential UI elements */
+    button, .btn, .no-print,
+    header, nav, .actions-bar,
+    .live-preview-title,
+    [class*="toggle"], [class*="tab"],
+    form, .form-section,
+    aside, .sidebar {
+      display: none !important;
+    }
+    
+    /* Force main content to full width */
+    main, .main-content, .preview-section {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+      box-shadow: none !important;
     }
     
     .print-page { 
@@ -163,7 +182,8 @@
       max-width: 210mm;
     }
     
-    .receipt-document {
+    /* Document container styles */
+    .receipt-document, .document-preview, .document-container {
       box-shadow: none !important;
       border: none !important;
       background: white !important;
@@ -171,6 +191,8 @@
       margin: 0 !important;
       height: auto !important;
       min-height: unset !important;
+      width: 100% !important;
+      max-width: 100% !important;
     }
     
     /* Compact spacing for print */
@@ -189,6 +211,7 @@
       padding: 0.5rem !important; 
     }
     
+    /* Typography adjustments */
     h1 { 
       font-size: 18pt !important; 
       margin-bottom: 0.5rem !important; 
@@ -218,10 +241,12 @@
       page-break-before: auto;
     }
     
-    /* Hide potential overflow elements */
+    /* Image optimization */
     img {
       max-width: 100% !important;
       height: auto !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
     }
   }
 }
