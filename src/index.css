@@ -227,9 +227,31 @@
       margin-bottom: 0.5rem !important; 
     }
     
-    table { 
+    /* Ensure tables are visible */
+    table, .equipment-table { 
+      display: table !important;
       font-size: 10pt !important;
       page-break-inside: avoid;
+      width: 100% !important;
+      border-collapse: collapse !important;
+    }
+    
+    .equipment-table thead,
+    .equipment-table tbody,
+    .equipment-table tr,
+    .equipment-table th,
+    .equipment-table td {
+      display: table-row-group !important;
+    }
+    
+    .equipment-table tr {
+      display: table-row !important;
+    }
+    
+    .equipment-table th,
+    .equipment-table td {
+      display: table-cell !important;
+      border: 1px solid #ddd !important;
     }
     
     .text-sm { 
