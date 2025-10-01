@@ -20,18 +20,18 @@ export const PurchaseRequestPreview = ({ data }: PurchaseRequestPreviewProps) =>
   return (
     <div className="document-preview receipt-document print-page">
       {/* Header */}
-      <div className="receipt-header">
+      <div className="receipt-header print:mb-2">
         <div className="flex justify-center items-center">
           <img 
             src={companyHeader}
             alt="IMGSA Groupe - Company Header" 
-            className="w-full max-w-2xl h-auto object-contain"
+            className="w-full max-w-2xl h-auto object-contain print:max-w-xl"
           />
         </div>
       </div>
 
-      {/* Document Info */}
-      <div className="flex justify-between items-center mb-4 text-xs">
+      {/* Document Info and Title - Combined for compact layout */}
+      <div className="flex justify-between items-center mb-2 text-xs print:mb-1">
         <div className="flex items-center gap-2">
           <MapPin className="h-3 w-3" />
           <span>Issued at: <strong>{data.document.place}</strong></span>
@@ -43,14 +43,14 @@ export const PurchaseRequestPreview = ({ data }: PurchaseRequestPreviewProps) =>
       </div>
 
       {/* Title */}
-      <div className="text-center mb-4">
-        <h2 className="text-lg font-bold text-foreground">DEMANDE D'ACHAT</h2>
-        <p className="text-xs text-muted-foreground mt-1">Purchase Request</p>
+      <div className="text-center mb-3 print:mb-2">
+        <h2 className="text-lg font-bold text-foreground print:text-base">DEMANDE D'ACHAT</h2>
+        <p className="text-xs text-muted-foreground">Purchase Request</p>
       </div>
 
-      {/* Requester Information */}
-      <div className="receipt-section">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+      {/* Requester Information - Inline */}
+      <div className="mb-3 print:mb-2">
+        <div className="flex items-center gap-4 text-sm print:text-xs">
           <div>
             <span className="font-medium">Demandeur:</span> <strong>{data.requester.name}</strong>
           </div>
@@ -100,65 +100,41 @@ export const PurchaseRequestPreview = ({ data }: PurchaseRequestPreviewProps) =>
 
       {/* Additional Notes */}
       {data.notes && (
-        <div className="receipt-section">
-          <h3 className="font-medium mb-1 text-sm">Additional Notes:</h3>
-          <p className="text-xs bg-muted/50 p-2 rounded">{data.notes}</p>
+        <div className="mb-3 print:mb-2">
+          <h3 className="font-medium mb-1 text-sm print:text-xs">Additional Notes:</h3>
+          <p className="text-xs bg-muted/50 p-2 rounded print:p-1">{data.notes}</p>
         </div>
       )}
 
-      {/* Signatures Section */}
-      <div className="receipt-section mt-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {/* Signatures Section - Compact */}
+      <div className="mt-4 print:mt-3">
+        <div className="grid grid-cols-3 gap-4 print:gap-2">
           <div>
-            <h3 className="font-medium mb-2 text-sm">Demandeur</h3>
-            <div className="space-y-1">
-              <p className="text-xs">
-                Name: <strong>{data.requester.name}</strong>
-              </p>
-              <div className="signature-box">
-                {data.requesterSignature ? (
-                  <span className="text-primary text-xs">Signature provided</span>
-                ) : (
-                  <span className="text-xs">Signature: ________________________</span>
-                )}
-              </div>
+            <h3 className="font-medium mb-1 text-xs print:text-[10px]">Demandeur</h3>
+            <p className="text-[10px] mb-1">Name: <strong>{data.requester.name}</strong></p>
+            <div className="border-b border-muted-foreground/30 pb-1 min-h-[40px] print:min-h-[30px]">
+              <span className="text-[9px] text-muted-foreground">Signature</span>
             </div>
           </div>
           <div>
-            <h3 className="font-medium mb-2 text-sm">Chef de Département</h3>
-            <div className="space-y-1">
-              <p className="text-xs">
-                Approval:
-              </p>
-              <div className="signature-box">
-                {data.departmentHeadSignature ? (
-                  <span className="text-primary text-xs">Signature provided</span>
-                ) : (
-                  <span className="text-xs">Signature: ________________________</span>
-                )}
-              </div>
+            <h3 className="font-medium mb-1 text-xs print:text-[10px]">Chef de Département</h3>
+            <p className="text-[10px] mb-1">Approval:</p>
+            <div className="border-b border-muted-foreground/30 pb-1 min-h-[40px] print:min-h-[30px]">
+              <span className="text-[9px] text-muted-foreground">Signature</span>
             </div>
           </div>
           <div>
-            <h3 className="font-medium mb-2 text-sm">Responsable Achats/Magasin</h3>
-            <div className="space-y-1">
-              <p className="text-xs">
-                Final Approval:
-              </p>
-              <div className="signature-box">
-                {data.purchasingManagerSignature ? (
-                  <span className="text-primary text-xs">Signature provided</span>
-                ) : (
-                  <span className="text-xs">Signature: ________________________</span>
-                )}
-              </div>
+            <h3 className="font-medium mb-1 text-xs print:text-[10px]">Responsable Achats/Magasin</h3>
+            <p className="text-[10px] mb-1">Final Approval:</p>
+            <div className="border-b border-muted-foreground/30 pb-1 min-h-[40px] print:min-h-[30px]">
+              <span className="text-[9px] text-muted-foreground">Signature</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Document Footer */}
-      <div className="mt-4 pt-2 border-t border-border text-center text-xs text-muted-foreground">
+      <div className="mt-3 pt-2 border-t border-border text-center text-xs text-muted-foreground print:mt-2 print:pt-1">
         <div className="flex items-center justify-center gap-1">
           <FileText className="h-3 w-3" />
           <span>Document No: <strong>{data.document.number}</strong></span>
