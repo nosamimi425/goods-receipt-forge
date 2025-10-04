@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Plus, Trash2, Building2, FileText, Users, Package } from "lucide-react";
 import { ReceiptData, EquipmentItem } from "@/types/receipt";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ReceiptFormProps {
   data: ReceiptData;
@@ -14,6 +15,7 @@ interface ReceiptFormProps {
 }
 
 export const ReceiptForm = ({ data, onChange }: ReceiptFormProps) => {
+  const { t } = useLanguage();
   const updateField = (section: keyof ReceiptData, field: string, value: any) => {
     onChange({
       ...data,
@@ -60,57 +62,57 @@ export const ReceiptForm = ({ data, onChange }: ReceiptFormProps) => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Building2 className="h-5 w-5" />
-            Company Information
+            {t('companyInformation')}
           </CardTitle>
         </CardHeader>
         <CardContent className="form-section">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="companyName">Company Name *</Label>
+              <Label htmlFor="companyName">{t('companyName_field')}</Label>
                <Input
                  id="companyName"
                  name="companyName"
                  autoComplete="organization"
                  value={data.company.name}
                  onChange={(e) => updateField("company", "name", e.target.value)}
-                 placeholder="Enter company name"
+                 placeholder={t('enterCompanyName')}
                />
             </div>
             <div>
-              <Label htmlFor="regNumber">Registration Number</Label>
+              <Label htmlFor="regNumber">{t('registrationNumber')}</Label>
                <Input
                  id="regNumber"
                  name="registrationNumber"
                  autoComplete="off"
                  value={data.company.registrationNumber || ""}
                  onChange={(e) => updateField("company", "registrationNumber", e.target.value)}
-                 placeholder="Tax/Registration number"
+                 placeholder={t('taxRegistration')}
                />
             </div>
             <div className="md:col-span-2">
-              <Label htmlFor="address1">Address Line 1</Label>
+              <Label htmlFor="address1">{t('addressLine1')}</Label>
                <Input
                  id="address1"
                  name="address1"
                  autoComplete="street-address"
                  value={data.company.address1}
                  onChange={(e) => updateField("company", "address1", e.target.value)}
-                 placeholder="Street address"
+                 placeholder={t('streetAddress')}
                />
             </div>
             <div>
-              <Label htmlFor="phone">Phone</Label>
+              <Label htmlFor="phone">{t('phone')}</Label>
                <Input
                  id="phone"
                  name="phone"
                  autoComplete="tel"
                  value={data.company.phone || ""}
                  onChange={(e) => updateField("company", "phone", e.target.value)}
-                 placeholder="Phone number"
+                 placeholder={t('phoneNumber')}
                />
             </div>
             <div>
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t('email')}</Label>
                <Input
                  id="email"
                  name="email"
@@ -118,7 +120,7 @@ export const ReceiptForm = ({ data, onChange }: ReceiptFormProps) => {
                  autoComplete="email"
                  value={data.company.email || ""}
                  onChange={(e) => updateField("company", "email", e.target.value)}
-                 placeholder="Email address"
+                 placeholder={t('emailAddress')}
                />
             </div>
           </div>
@@ -130,24 +132,24 @@ export const ReceiptForm = ({ data, onChange }: ReceiptFormProps) => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <FileText className="h-5 w-5" />
-            Document Information
+            {t('documentInformation')}
           </CardTitle>
         </CardHeader>
         <CardContent className="form-section">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <Label htmlFor="place">Place</Label>
+              <Label htmlFor="place">{t('place')}</Label>
                <Input
                  id="place"
                  name="place"
                  autoComplete="address-line1"
                  value={data.document.place}
                  onChange={(e) => updateField("document", "place", e.target.value)}
-                 placeholder="OULED GACEM"
+                 placeholder={t('documentPlace')}
                />
             </div>
             <div>
-              <Label htmlFor="date">Date</Label>
+              <Label htmlFor="date">{t('date')}</Label>
                <Input
                  id="date"
                  name="date"
@@ -158,7 +160,7 @@ export const ReceiptForm = ({ data, onChange }: ReceiptFormProps) => {
                />
             </div>
             <div>
-              <Label htmlFor="docNumber">Document Number</Label>
+              <Label htmlFor="docNumber">{t('documentNumber')}</Label>
                <Input
                  id="docNumber"
                  name="documentNumber"
@@ -177,72 +179,72 @@ export const ReceiptForm = ({ data, onChange }: ReceiptFormProps) => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Users className="h-5 w-5" />
-            Parties
+            {t('parties')}
           </CardTitle>
         </CardHeader>
         <CardContent className="form-section">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h3 className="font-medium mb-3">Recipient</h3>
+              <h3 className="font-medium mb-3">{t('recipient')}</h3>
               <div className="space-y-3">
                 <div>
-                  <Label htmlFor="recipientName">Full Name *</Label>
+                  <Label htmlFor="recipientName">{t('fullName')}</Label>
                    <Input
                      id="recipientName"
                      name="recipientName"
                      autoComplete="name"
                      value={data.recipient.name}
                      onChange={(e) => updateField("recipient", "name", e.target.value)}
-                     placeholder="Recipient full name"
+                     placeholder={t('fullName')}
                    />
                 </div>
                 <div>
-                  <Label htmlFor="recipientTitle">Job Title</Label>
+                  <Label htmlFor="recipientTitle">{t('jobTitle')}</Label>
                    <Input
                      id="recipientTitle"
                      name="recipientJobTitle"
                      autoComplete="organization-title"
                      value={data.recipient.jobTitle || ""}
                      onChange={(e) => updateField("recipient", "jobTitle", e.target.value)}
-                     placeholder="Job title"
+                     placeholder={t('jobTitle')}
                    />
                 </div>
                 <div>
-                  <Label htmlFor="recipientId">ID Number</Label>
+                  <Label htmlFor="recipientId">{t('idNumber')}</Label>
                    <Input
                      id="recipientId"
                      name="recipientId"
                      autoComplete="off"
                      value={data.recipient.idNumber || ""}
                      onChange={(e) => updateField("recipient", "idNumber", e.target.value)}
-                     placeholder="ID number"
+                     placeholder={t('idNumber')}
                    />
                 </div>
               </div>
             </div>
             <div>
-              <h3 className="font-medium mb-3">Issuer</h3>
+              <h3 className="font-medium mb-3">{t('issuer')}</h3>
               <div className="space-y-3">
                 <div>
-                  <Label htmlFor="issuerName">Full Name *</Label>
+                  <Label htmlFor="issuerName">{t('fullName')}</Label>
                    <Input
                      id="issuerName"
                      name="issuerName"
                      autoComplete="name"
                      value={data.issuer.name}
                      onChange={(e) => updateField("issuer", "name", e.target.value)}
-                     placeholder="Issuer full name"
+                     placeholder={t('fullName')}
                    />
                 </div>
                 <div>
-                  <Label htmlFor="issuerTitle">Job Title</Label>
+                  <Label htmlFor="issuerTitle">{t('jobTitle')}</Label>
                    <Input
                      id="issuerTitle"
                      name="issuerJobTitle"
                      autoComplete="organization-title"
                      value={data.issuer.jobTitle || ""}
                      onChange={(e) => updateField("issuer", "jobTitle", e.target.value)}
-                     placeholder="Job title"
+                     placeholder={t('jobTitle')}
                    />
                 </div>
               </div>
@@ -257,25 +259,25 @@ export const ReceiptForm = ({ data, onChange }: ReceiptFormProps) => {
           <CardTitle className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Package className="h-5 w-5" />
-              Equipment List
+              {t('equipmentList')}
             </div>
             <Button onClick={addEquipmentItem} size="sm" className="btn-gradient">
               <Plus className="h-4 w-4 mr-2" />
-              Add Item
+              {t('addItem')}
             </Button>
           </CardTitle>
         </CardHeader>
         <CardContent className="form-section">
           {data.equipment.length === 0 ? (
             <p className="text-muted-foreground text-center py-4">
-              No equipment items added yet. Click "Add Item" to start.
+              {t('noItemsYet')}
             </p>
           ) : (
             <div className="space-y-4">
               {data.equipment.map((item, index) => (
                 <div key={item.id} className="border border-border rounded-lg p-4 space-y-3">
                   <div className="flex justify-between items-center">
-                    <h4 className="font-medium">Item {index + 1}</h4>
+                    <h4 className="font-medium">{t('item')} {index + 1}</h4>
                     {data.equipment.length > 1 && (
                       <Button
                         onClick={() => removeEquipmentItem(item.id)}
@@ -288,17 +290,17 @@ export const ReceiptForm = ({ data, onChange }: ReceiptFormProps) => {
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                     <div className="md:col-span-2 lg:col-span-1">
-                      <Label>Description *</Label>
+                      <Label>{t('description')}</Label>
                        <Input
                          name="equipmentDescription"
                          autoComplete="off"
                          value={item.description}
                          onChange={(e) => updateEquipmentItem(item.id, "description", e.target.value)}
-                         placeholder="Equipment description"
+                         placeholder={t('equipmentDescription')}
                        />
                     </div>
                     <div>
-                      <Label>Quantity *</Label>
+                      <Label>{t('quantity')}</Label>
                        <Input
                          name="quantity"
                          type="number"
@@ -309,7 +311,7 @@ export const ReceiptForm = ({ data, onChange }: ReceiptFormProps) => {
                        />
                     </div>
                     <div>
-                      <Label>Unit</Label>
+                      <Label>{t('unit')}</Label>
                        <Input
                          name="unit"
                          autoComplete="off"
@@ -319,33 +321,33 @@ export const ReceiptForm = ({ data, onChange }: ReceiptFormProps) => {
                        />
                     </div>
                     <div>
-                      <Label>Reference/Model</Label>
+                      <Label>{t('reference')}</Label>
                        <Input
                          name="reference"
                          autoComplete="off"
                          value={item.reference || ""}
                          onChange={(e) => updateEquipmentItem(item.id, "reference", e.target.value)}
-                         placeholder="Model number"
+                         placeholder={t('modelNumber')}
                        />
                     </div>
                     <div>
-                      <Label>Serial Number</Label>
+                      <Label>{t('serialNumber')}</Label>
                        <Input
                          name="serialNumber"
                          autoComplete="off"
                          value={item.serialNumber || ""}
                          onChange={(e) => updateEquipmentItem(item.id, "serialNumber", e.target.value)}
-                         placeholder="Serial number"
+                         placeholder={t('serialNumberPlaceholder')}
                        />
                     </div>
                     <div>
-                      <Label>Notes</Label>
+                      <Label>{t('notes_field')}</Label>
                        <Input
                          name="notes"
                          autoComplete="off"
                          value={item.notes || ""}
                          onChange={(e) => updateEquipmentItem(item.id, "notes", e.target.value)}
-                         placeholder="Additional notes"
+                         placeholder={t('additionalNotesItem')}
                        />
                     </div>
                   </div>
@@ -359,31 +361,31 @@ export const ReceiptForm = ({ data, onChange }: ReceiptFormProps) => {
       {/* Confirmations & Notes */}
       <Card>
         <CardHeader>
-          <CardTitle>Confirmations & Notes</CardTitle>
+          <CardTitle>{t('confirmationsNotes')}</CardTitle>
         </CardHeader>
         <CardContent className="form-section">
           <div className="space-y-4">
             <div>
-              <Label htmlFor="confirmationText">Confirmation Text</Label>
+              <Label htmlFor="confirmationText">{t('confirmationText')}</Label>
                <Textarea
                  id="confirmationText"
                  name="confirmationText"
                  autoComplete="off"
                  value={data.confirmationText}
                  onChange={(e) => onChange({ ...data, confirmationText: e.target.value })}
-                 placeholder="I hereby confirm that I have received the above-mentioned equipment in good condition and in the specified quantity."
+                 placeholder={t('confirmationTextPlaceholder')}
                  rows={3}
                />
             </div>
             <div>
-              <Label htmlFor="notes">Additional Notes</Label>
+              <Label htmlFor="notes">{t('additionalNotes')}</Label>
                <Textarea
                  id="notes"
                  name="notes"
                  autoComplete="off"
                  value={data.notes || ""}
                  onChange={(e) => onChange({ ...data, notes: e.target.value })}
-                 placeholder="Any additional notes or remarks"
+                 placeholder={t('anyAdditionalNotes')}
                  rows={2}
                />
             </div>

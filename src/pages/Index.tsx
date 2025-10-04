@@ -9,8 +9,11 @@ import { PurchaseRequestForm } from "@/components/PurchaseRequestForm";
 import { PurchaseRequestPreview } from "@/components/PurchaseRequestPreview";
 import { ReceiptData } from "@/types/receipt";
 import { PurchaseRequestData } from "@/types/purchaseRequest";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { LanguageToggle } from "@/components/LanguageToggle";
 
 const Index = () => {
+  const { t } = useLanguage();
   const [showPreview, setShowPreview] = useState(true);
   const [activeSection, setActiveSection] = useState<'receipt' | 'purchase'>('receipt');
   
@@ -85,12 +88,13 @@ const Index = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-2xl font-bold text-primary">IMGSA TECHNOLOGY</h1>
+              <h1 className="text-2xl font-bold text-primary">{t('companyName')}</h1>
               <p className="text-muted-foreground">
-                {activeSection === 'receipt' ? 'Professional Goods Handover Receipts' : 'Purchase Request Management'}
+                {activeSection === 'receipt' ? t('receiptSubtitle') : t('purchaseRequestSubtitle')}
               </p>
             </div>
             <div className="flex gap-2">
+              <LanguageToggle />
               <Button
                 variant="outline"
                 size="sm"
@@ -101,11 +105,11 @@ const Index = () => {
               </Button>
               <Button onClick={handlePrint} variant="outline" size="sm">
                 <Printer className="h-4 w-4 mr-2" />
-                Print
+                {t('print')}
               </Button>
               <Button onClick={handleDownloadPDF} size="sm" className="btn-gradient">
                 <FileDown className="h-4 w-4 mr-2" />
-                Download PDF
+                {t('downloadPDF')}
               </Button>
             </div>
           </div>
@@ -119,7 +123,7 @@ const Index = () => {
               className="flex items-center space-x-2"
             >
               <FileText className="h-4 w-4" />
-              <span>Décharge</span>
+              <span>{t('receipt')}</span>
             </Button>
             <Button
               variant={activeSection === 'purchase' ? 'default' : 'ghost'}
@@ -128,7 +132,7 @@ const Index = () => {
               className="flex items-center space-x-2"
             >
               <ShoppingCart className="h-4 w-4" />
-              <span>Demande d'Achat</span>
+              <span>{t('purchaseRequest')}</span>
             </Button>
           </div>
         </div>
@@ -142,12 +146,12 @@ const Index = () => {
             <Card>
               <CardHeader>
                 <CardTitle>
-                  {activeSection === 'receipt' ? 'Receipt Details' : 'Purchase Request Details'}
+                  {activeSection === 'receipt' ? t('receiptDetails') : t('purchaseRequestDetails')}
                 </CardTitle>
                 <p className="text-sm text-muted-foreground">
                   {activeSection === 'receipt' 
-                    ? 'Fill in the information below to generate your receipt'
-                    : 'Fill in the information below to generate your purchase request'
+                    ? t('receiptFormDescription')
+                    : t('purchaseRequestFormDescription')
                   }
                 </p>
               </CardHeader>
@@ -166,11 +170,11 @@ const Index = () => {
             <div className="sticky top-6">
               <Card className="no-print mb-4">
                 <CardHeader>
-                  <CardTitle>Live Preview</CardTitle>
+                  <CardTitle>{t('livePreview')}</CardTitle>
                   <p className="text-sm text-muted-foreground">
                     {activeSection === 'receipt'
-                      ? 'This is how your receipt will look when printed'
-                      : 'This is how your purchase request will look when printed'
+                      ? t('receiptPreviewDescription')
+                      : t('purchaseRequestPreviewDescription')
                     }
                   </p>
                 </CardHeader>

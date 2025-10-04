@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { PurchaseRequestData, RequestedItem } from "@/types/purchaseRequest";
 import { Plus, Trash2 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface PurchaseRequestFormProps {
   data: PurchaseRequestData;
@@ -12,6 +13,8 @@ interface PurchaseRequestFormProps {
 }
 
 export const PurchaseRequestForm = ({ data, onChange }: PurchaseRequestFormProps) => {
+  const { t } = useLanguage();
+  
   const updateField = (section: keyof PurchaseRequestData, field: string, value: any) => {
     onChange({
       ...data,
@@ -57,21 +60,21 @@ export const PurchaseRequestForm = ({ data, onChange }: PurchaseRequestFormProps
     <div className="space-y-6">
       {/* Document Information */}
       <Card className="p-6">
-        <h3 className="text-lg font-semibold mb-4">Document Information</h3>
+        <h3 className="text-lg font-semibold mb-4">{t('documentInformation')}</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <Label htmlFor="place">Place</Label>
+            <Label htmlFor="place">{t('place')}</Label>
             <Input
               id="place"
               name="place"
               autoComplete="address-line1"
               value={data.document.place}
               onChange={(e) => updateField("document", "place", e.target.value)}
-              placeholder="Document place"
+              placeholder={t('documentPlace')}
             />
           </div>
           <div>
-            <Label htmlFor="date">Date</Label>
+            <Label htmlFor="date">{t('date')}</Label>
             <Input
               id="date"
               name="date"
@@ -82,14 +85,14 @@ export const PurchaseRequestForm = ({ data, onChange }: PurchaseRequestFormProps
             />
           </div>
           <div>
-            <Label htmlFor="number">Document Number</Label>
+            <Label htmlFor="number">{t('documentNumber')}</Label>
             <Input
               id="number"
               name="documentNumber"
               autoComplete="off"
               value={data.document.number}
               onChange={(e) => updateField("document", "number", e.target.value)}
-              placeholder="Document number"
+              placeholder={t('documentNumber')}
             />
           </div>
         </div>
@@ -97,28 +100,28 @@ export const PurchaseRequestForm = ({ data, onChange }: PurchaseRequestFormProps
 
       {/* Requester Information */}
       <Card className="p-6">
-        <h3 className="text-lg font-semibold mb-4">Requester Information</h3>
+        <h3 className="text-lg font-semibold mb-4">{t('requesterInformation')}</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <Label htmlFor="requesterName">Requester Name</Label>
+            <Label htmlFor="requesterName">{t('requesterName')}</Label>
             <Input
               id="requesterName"
               name="requesterName"
               autoComplete="name"
               value={data.requester.name}
               onChange={(e) => updateField("requester", "name", e.target.value)}
-              placeholder="Requester's full name"
+              placeholder={t('requesterFullName')}
             />
           </div>
           <div>
-            <Label htmlFor="department">Department</Label>
+            <Label htmlFor="department">{t('department')}</Label>
             <Input
               id="department"
               name="department"
               autoComplete="organization"
               value={data.requester.department}
               onChange={(e) => updateField("requester", "department", e.target.value)}
-              placeholder="Department name"
+              placeholder={t('departmentName')}
             />
           </div>
         </div>
@@ -127,10 +130,10 @@ export const PurchaseRequestForm = ({ data, onChange }: PurchaseRequestFormProps
       {/* Requested Items */}
       <Card className="p-6">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-semibold">Requested Items</h3>
+          <h3 className="text-lg font-semibold">{t('requestedItems')}</h3>
           <Button onClick={addRequestedItem} size="sm">
             <Plus className="h-4 w-4 mr-2" />
-            Add Item
+            {t('addItem')}
           </Button>
         </div>
         
@@ -139,7 +142,7 @@ export const PurchaseRequestForm = ({ data, onChange }: PurchaseRequestFormProps
             {data.requestedItems.map((item, index) => (
               <div key={item.id} className="border rounded-lg p-4 space-y-3">
                 <div className="flex justify-between items-center">
-                  <h4 className="font-medium">Item {index + 1}</h4>
+                  <h4 className="font-medium">{t('item')} {index + 1}</h4>
                   <Button
                     variant="destructive"
                     size="sm"
@@ -151,18 +154,18 @@ export const PurchaseRequestForm = ({ data, onChange }: PurchaseRequestFormProps
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div>
-                    <Label htmlFor={`itemName-${item.id}`}>Item Name</Label>
+                    <Label htmlFor={`itemName-${item.id}`}>{t('itemName')}</Label>
                     <Input
                       id={`itemName-${item.id}`}
                       name="itemName"
                       autoComplete="off"
                       value={item.itemName}
                       onChange={(e) => updateRequestedItem(item.id, "itemName", e.target.value)}
-                      placeholder="Item name/description"
+                      placeholder={t('itemNameDescription')}
                     />
                   </div>
                   <div>
-                    <Label htmlFor={`quantity-${item.id}`}>Quantity</Label>
+                    <Label htmlFor={`quantity-${item.id}`}>{t('quantity')}</Label>
                     <Input
                       id={`quantity-${item.id}`}
                       name="quantity"
@@ -174,7 +177,7 @@ export const PurchaseRequestForm = ({ data, onChange }: PurchaseRequestFormProps
                     />
                   </div>
                   <div>
-                    <Label htmlFor={`unit-${item.id}`}>Unit</Label>
+                    <Label htmlFor={`unit-${item.id}`}>{t('unit')}</Label>
                     <Input
                       id={`unit-${item.id}`}
                       name="unit"
@@ -187,27 +190,27 @@ export const PurchaseRequestForm = ({ data, onChange }: PurchaseRequestFormProps
                 </div>
                 
                 <div>
-                  <Label htmlFor={`technicalSpecs-${item.id}`}>Technical Specifications</Label>
+                  <Label htmlFor={`technicalSpecs-${item.id}`}>{t('technicalSpecs')}</Label>
                   <Textarea
                     id={`technicalSpecs-${item.id}`}
                     name="technicalSpecs"
                     autoComplete="off"
                     value={item.technicalSpecs}
                     onChange={(e) => updateRequestedItem(item.id, "technicalSpecs", e.target.value)}
-                    placeholder="Technical specifications and requirements"
+                    placeholder={t('technicalRequirements')}
                     className="min-h-16"
                   />
                 </div>
                 
                 <div>
-                  <Label htmlFor={`observation-${item.id}`}>Observation</Label>
+                  <Label htmlFor={`observation-${item.id}`}>{t('observation')}</Label>
                   <Textarea
                     id={`observation-${item.id}`}
                     name="observation"
                     autoComplete="off"
                     value={item.observation || ""}
                     onChange={(e) => updateRequestedItem(item.id, "observation", e.target.value)}
-                    placeholder="Additional observations or notes"
+                    placeholder={t('additionalObservations')}
                     className="min-h-12"
                   />
                 </div>
@@ -216,20 +219,20 @@ export const PurchaseRequestForm = ({ data, onChange }: PurchaseRequestFormProps
           </div>
         ) : (
           <div className="border border-dashed border-muted-foreground/30 rounded-lg p-8 text-center text-muted-foreground">
-            <p>No items added yet. Click "Add Item" to start.</p>
+            <p>{t('noItemsYet')}</p>
           </div>
         )}
       </Card>
 
       {/* Additional Notes */}
       <Card className="p-6">
-        <h3 className="text-lg font-semibold mb-4">Additional Notes</h3>
+        <h3 className="text-lg font-semibold mb-4">{t('additionalNotes')}</h3>
         <Textarea
           name="notes"
           autoComplete="off"
           value={data.notes || ""}
           onChange={(e) => onChange({ ...data, notes: e.target.value })}
-          placeholder="Any additional notes or comments..."
+          placeholder={t('additionalNotesPlaceholder')}
           className="min-h-20"
         />
       </Card>

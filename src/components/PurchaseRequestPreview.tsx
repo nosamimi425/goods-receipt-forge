@@ -1,16 +1,19 @@
 import { PurchaseRequestData } from "@/types/purchaseRequest";
 import { MapPin, Calendar, FileText } from "lucide-react";
 import companyHeader from "@/assets/company-header.jpg";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface PurchaseRequestPreviewProps {
   data: PurchaseRequestData;
 }
 
 export const PurchaseRequestPreview = ({ data }: PurchaseRequestPreviewProps) => {
+  const { t, language } = useLanguage();
+  
   const formatDate = (dateString: string) => {
     if (!dateString) return "";
     const date = new Date(dateString);
-    return date.toLocaleDateString("en-GB", {
+    return date.toLocaleDateString(language === 'ar' ? 'ar-DZ' : 'fr-FR', {
       day: "2-digit",
       month: "2-digit",
       year: "numeric",
@@ -34,28 +37,28 @@ export const PurchaseRequestPreview = ({ data }: PurchaseRequestPreviewProps) =>
       <div className="flex justify-between items-center mb-2 text-xs print:mb-1">
         <div className="flex items-center gap-2">
           <MapPin className="h-3 w-3" />
-          <span>Issued at: <strong>{data.document.place}</strong></span>
+          <span>{t('issuedAt')}: <strong>{data.document.place}</strong></span>
         </div>
         <div className="flex items-center gap-2">
           <Calendar className="h-3 w-3" />
-          <span>Date: <strong>{formatDate(data.document.date)}</strong></span>
+          <span>{t('date')}: <strong>{formatDate(data.document.date)}</strong></span>
         </div>
       </div>
 
       {/* Title */}
       <div className="text-center mb-3 print:mb-2">
-        <h2 className="text-lg font-bold text-foreground print:text-base">DEMANDE D'ACHAT</h2>
-        <p className="text-xs text-muted-foreground">Purchase Request</p>
+        <h2 className="text-lg font-bold text-foreground print:text-base">{t('purchaseRequestTitle')}</h2>
+        <p className="text-xs text-muted-foreground">{t('purchaseRequestSubtitle_doc')}</p>
       </div>
 
       {/* Requester Information - Inline */}
       <div className="mb-3 print:mb-2">
         <div className="flex items-center gap-4 text-sm print:text-xs">
           <div>
-            <span className="font-medium">Demandeur:</span> <strong>{data.requester.name}</strong>
+            <span className="font-medium">{t('requester')}:</span> <strong>{data.requester.name}</strong>
           </div>
           <div>
-            <span className="font-medium">Département:</span> <strong>{data.requester.department}</strong>
+            <span className="font-medium">{t('department')}:</span> <strong>{data.requester.department}</strong>
           </div>
         </div>
       </div>
@@ -67,11 +70,11 @@ export const PurchaseRequestPreview = ({ data }: PurchaseRequestPreviewProps) =>
             <table className="w-full">
               <thead className="bg-muted">
                 <tr>
-                  <th className="text-left p-2 font-medium text-xs">Désignation de l'article</th>
-                  <th className="text-left p-2 font-medium text-xs">Spécifications techniques</th>
-                  <th className="text-center p-2 font-medium w-16 text-xs">Quantité</th>
-                  <th className="text-center p-2 font-medium w-12 text-xs">Unité</th>
-                  <th className="text-left p-2 font-medium text-xs">Observation</th>
+                  <th className="text-left p-2 font-medium text-xs">{t('itemNameHeader')}</th>
+                  <th className="text-left p-2 font-medium text-xs">{t('technicalSpecsHeader')}</th>
+                  <th className="text-center p-2 font-medium w-16 text-xs">{t('quantityHeader')}</th>
+                  <th className="text-center p-2 font-medium w-12 text-xs">{t('unitHeader')}</th>
+                  <th className="text-left p-2 font-medium text-xs">{t('observationHeader')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -93,7 +96,7 @@ export const PurchaseRequestPreview = ({ data }: PurchaseRequestPreviewProps) =>
           </div>
         ) : (
           <div className="border border-dashed border-muted-foreground/30 rounded-lg p-6 text-center text-muted-foreground">
-            No items added yet
+            {t('noItemsYet')}
           </div>
         )}
       </div>
@@ -101,7 +104,7 @@ export const PurchaseRequestPreview = ({ data }: PurchaseRequestPreviewProps) =>
       {/* Additional Notes */}
       {data.notes && (
         <div className="mb-3 print:mb-2">
-          <h3 className="font-medium mb-1 text-sm print:text-xs">Additional Notes:</h3>
+          <h3 className="font-medium mb-1 text-sm print:text-xs">{t('additionalNotes')}:</h3>
           <p className="text-xs bg-muted/50 p-2 rounded print:p-1">{data.notes}</p>
         </div>
       )}
@@ -110,24 +113,24 @@ export const PurchaseRequestPreview = ({ data }: PurchaseRequestPreviewProps) =>
       <div className="mt-4 print:mt-3">
         <div className="grid grid-cols-3 gap-4 print:gap-2">
           <div>
-            <h3 className="font-medium mb-1 text-xs print:text-[10px]">Demandeur</h3>
-            <p className="text-[10px] mb-1">Name: <strong>{data.requester.name}</strong></p>
+            <h3 className="font-medium mb-1 text-xs print:text-[10px]">{t('requester')}</h3>
+            <p className="text-[10px] mb-1">{t('name')}: <strong>{data.requester.name}</strong></p>
             <div className="border-b border-muted-foreground/30 pb-1 min-h-[40px] print:min-h-[30px]">
-              <span className="text-[9px] text-muted-foreground">Signature</span>
+              <span className="text-[9px] text-muted-foreground">{t('signature')}</span>
             </div>
           </div>
           <div>
-            <h3 className="font-medium mb-1 text-xs print:text-[10px]">Chef de Département</h3>
-            <p className="text-[10px] mb-1">Approval:</p>
+            <h3 className="font-medium mb-1 text-xs print:text-[10px]">{t('departmentHead')}</h3>
+            <p className="text-[10px] mb-1">{t('approval')}:</p>
             <div className="border-b border-muted-foreground/30 pb-1 min-h-[40px] print:min-h-[30px]">
-              <span className="text-[9px] text-muted-foreground">Signature</span>
+              <span className="text-[9px] text-muted-foreground">{t('signature')}</span>
             </div>
           </div>
           <div>
-            <h3 className="font-medium mb-1 text-xs print:text-[10px]">Responsable Achats/Magasin</h3>
-            <p className="text-[10px] mb-1">Final Approval:</p>
+            <h3 className="font-medium mb-1 text-xs print:text-[10px]">{t('purchasingManager')}</h3>
+            <p className="text-[10px] mb-1">{t('finalApproval')}:</p>
             <div className="border-b border-muted-foreground/30 pb-1 min-h-[40px] print:min-h-[30px]">
-              <span className="text-[9px] text-muted-foreground">Signature</span>
+              <span className="text-[9px] text-muted-foreground">{t('signature')}</span>
             </div>
           </div>
         </div>
@@ -137,7 +140,7 @@ export const PurchaseRequestPreview = ({ data }: PurchaseRequestPreviewProps) =>
       <div className="mt-3 pt-2 border-t border-border text-center text-xs text-muted-foreground print:mt-2 print:pt-1">
         <div className="flex items-center justify-center gap-1">
           <FileText className="h-3 w-3" />
-          <span>Document No: <strong>{data.document.number}</strong></span>
+          <span>{t('documentNo')}: <strong>{data.document.number}</strong></span>
         </div>
       </div>
     </div>

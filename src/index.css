@@ -123,6 +123,48 @@
     @apply bg-background text-foreground;
   }
 
+  /* RTL Support for Arabic */
+  [dir="rtl"] {
+    direction: rtl;
+  }
+  
+  [dir="rtl"] .flex {
+    flex-direction: row-reverse;
+  }
+  
+  [dir="rtl"] .space-x-1 > * + *,
+  [dir="rtl"] .space-x-2 > * + *,
+  [dir="rtl"] .space-x-4 > * + * {
+    margin-left: 0;
+  }
+  
+  [dir="rtl"] .gap-2,
+  [dir="rtl"] .gap-4 {
+    column-gap: inherit;
+  }
+  
+  [dir="rtl"] table {
+    direction: rtl;
+    text-align: right;
+  }
+  
+  [dir="rtl"] th,
+  [dir="rtl"] td {
+    text-align: right;
+  }
+  
+  [dir="rtl"] .text-center {
+    text-align: center !important;
+  }
+  
+  [dir="rtl"] .text-left {
+    text-align: right;
+  }
+  
+  [dir="rtl"] .text-right {
+    text-align: left;
+  }
+
   /* Print styles for professional A4 documents */
   @page {
     size: A4;
